@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pack Barbearia Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0C0C0C;--black2:#111;--black3:#161616;--black4:#1C1C1C;--black5:#242424;--black6:#2C2C2C;
+  --gold:#D4AF37;--gold2:#F0D060;--gold3:#A88820;
+  --gold-dim:rgba(212,175,55,.14);--gold-line:rgba(212,175,55,.22);--gold-glow:rgba(212,175,55,.08);
+  --white:#FFF;--off:#E8E8E8;--muted:#909090;--dim:#555;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--off);font-family:'Inter',sans-serif;line-height:1.65;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── TEXTURES ── */
+.tex-leather{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 8px),repeating-linear-gradient(-45deg,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 8px)}
+.tex-diamond{background-image:repeating-linear-gradient(45deg,rgba(212,175,55,.04) 0,rgba(212,175,55,.04) 1px,transparent 0,transparent 50%),repeating-linear-gradient(-45deg,rgba(212,175,55,.04) 0,rgba(212,175,55,.04) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.tex-lines{background-image:repeating-linear-gradient(0deg,rgba(212,175,55,.05) 0,rgba(212,175,55,.05) 1px,transparent 1px,transparent 32px)}
+
+/* ── UTILITY ── */
+.container{max-width:1060px;margin:0 auto;padding:0 28px}
+.gold{color:var(--gold)}
+.eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-rule{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 28px}
+.section-rule span{font-size:14px;color:var(--gold)}
+.section-rule::before,.section-rule::after{content:'';flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.section-rule::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.section-rule.left{justify-content:flex-start;margin-left:0}
+.section-rule.left::before{display:none}
+.section-rule.left::after{max-width:80px;background:linear-gradient(90deg,var(--gold),transparent)}
+
+/* ── ORNAMENTAL DIVIDER ── */
+.orn-div{display:flex;align-items:center;justify-content:center;gap:20px;padding:12px 0;overflow:hidden}
+.orn-div::before,.orn-div::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-line))}
+.orn-div::after{background:linear-gradient(90deg,var(--gold-line),transparent)}
+.orn-div-inner{display:flex;align-items:center;gap:12px;color:var(--gold);font-size:13px;opacity:.7;white-space:nowrap}
+
+/* ── ANN BAR ── */
+.ann-bar{background:linear-gradient(90deg,#0e0b00,#1c1600,#0e0b00);border-bottom:1px solid var(--gold-line);padding:10px 20px;text-align:center}
+.ann-bar-inner{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.ann-bar span{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+#topTimer{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;color:var(--white);background:rgba(212,175,55,.15);border:1px solid var(--gold-line);padding:2px 12px;border-radius:2px;letter-spacing:2px}
+
+/* ── HERO ── */
+.hero{position:relative;background:var(--black);overflow:hidden;padding:90px 0 80px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 75% 50%,rgba(212,175,55,.06) 0%,transparent 65%),radial-gradient(ellipse 40% 70% at 5% 30%,rgba(212,175,55,.04) 0%,transparent 60%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold-line);padding:7px 18px;border-radius:2px;margin-bottom:28px;background:rgba(212,175,55,.04)}
+.hero-badge-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-badge-txt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+h1.hero-title{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(32px,4.2vw,58px);line-height:1.06;color:var(--white);margin-bottom:24px;letter-spacing:-1px}
+h1.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:clamp(15px,1.7vw,17px);color:var(--muted);max-width:500px;line-height:1.85;margin-bottom:36px}
+.hero-sub strong{color:var(--off);font-weight:600}
+.hero-ctas{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:44px}
+.btn-gold{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));color:#0C0C0C;font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;padding:16px 32px;border-radius:2px;transition:filter .2s,transform .15s,box-shadow .2s;box-shadow:0 6px 28px rgba(212,175,55,.3)}
+.btn-gold:hover{filter:brightness(1.12);transform:translateY(-2px);box-shadow:0 12px 40px rgba(212,175,55,.5)}
+.btn-ghost{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.5px;border-bottom:1px solid var(--black6);padding-bottom:2px;transition:color .2s,border-color .2s}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold-line)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--black5);border-radius:2px;overflow:hidden}
+.stat{padding:16px 12px;text-align:center;border-right:1px solid var(--black5)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:11px;color:var(--dim);margin-top:5px;letter-spacing:.3px}
+
+/* Hero aside */
+.hero-aside{}
+.hero-img-wrap{width:100%;position:relative}
+.hero-img-wrap img{width:100%;height:auto;display:block;filter:drop-shadow(0 32px 80px rgba(0,0,0,.9)) drop-shadow(0 0 60px rgba(212,175,55,.18))}
+#dropZone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:320px;border:2px dashed var(--gold-line);border-radius:4px;cursor:pointer;transition:border-color .2s,background .2s;background:rgba(212,175,55,.02)}
+#dropZone:hover{border-color:var(--gold);background:rgba(212,175,55,.06)}
+.dz-icon{font-size:42px}
+.dz-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:var(--gold)}
+.dz-sub{font-size:11px;color:var(--muted)}
+
+/* ── PROBLEMA ── */
+.problema{background:var(--black2);padding:90px 0}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.prob-content h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(24px,2.8vw,38px);color:var(--white);line-height:1.2;margin-bottom:24px;letter-spacing:-.5px}
+.prob-content p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:16px}
+.prob-content p strong{color:var(--off)}
+.callout{border-left:2px solid var(--gold);padding:14px 20px;background:var(--gold-dim);border-radius:0 3px 3px 0;margin:24px 0}
+.callout p{font-size:16px;color:var(--white);line-height:1.7;margin:0;font-style:italic}
+.prob-cards{display:flex;flex-direction:column;gap:14px}
+.prob-card{background:var(--black3);border:1px solid var(--black5);border-radius:3px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;transition:border-color .25s}
+.prob-card:hover{border-color:var(--gold-line)}
+.prob-card-icon{width:42px;height:42px;border:1px solid var(--gold-line);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.prob-card-text h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--white);margin-bottom:4px;letter-spacing:.3px}
+.prob-card-text p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+
+/* ── PARA QUEM É ── */
+.paraquem{background:var(--black) ;padding:90px 0}
+.paraquem-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:52px}
+.pq-block{border-radius:3px;padding:32px 28px}
+.pq-sim{background:var(--black3);border:1px solid var(--gold-line)}
+.pq-nao{background:var(--black3);border:1px solid var(--black5)}
+.pq-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.pq-sim .pq-title{color:var(--gold)}
+.pq-nao .pq-title{color:var(--dim)}
+.pq-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.pq-list li{display:flex;align-items:flex-start;gap:12px;font-size:14px;line-height:1.6}
+.pq-sim .pq-list li{color:var(--off)}
+.pq-nao .pq-list li{color:var(--dim)}
+.pq-sim .pq-list li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.pq-nao .pq-list li::before{content:'✕';color:var(--black6);flex-shrink:0}
+
+/* ── ANTES/DEPOIS ── */
+.antesdepois{background:var(--black2);padding:90px 0}
+.ad-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:52px}
+.ad-card{border-radius:3px;padding:28px 24px}
+.ad-antes{background:var(--black3);border:1px solid var(--black5)}
+.ad-depois{background:var(--black3);border:1px solid var(--gold-line)}
+.ad-tag{font-family:'Montserrat',sans-serif;font-weight:800;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.ad-antes .ad-tag{color:var(--dim)}
+.ad-depois .ad-tag{color:var(--gold)}
+.ad-mock{background:var(--black4);border-radius:4px;padding:16px;margin-bottom:20px}
+.ad-mock-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ad-avatar{width:32px;height:32px;border-radius:50%;background:var(--black6);flex-shrink:0}
+.ad-antes .ad-avatar{background:var(--black6)}
+.ad-depois .ad-avatar{background:linear-gradient(135deg,var(--gold3),var(--gold))}
+.ad-handle{font-size:12px;font-weight:600}
+.ad-antes .ad-handle{color:var(--dim)}
+.ad-depois .ad-handle{color:var(--white)}
+.ad-followers{font-size:11px;color:var(--dim)}
+.ad-grid-imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.ad-img{aspect-ratio:1;border-radius:2px}
+.ad-antes .ad-img{background:var(--black5)}
+.ad-depois .ad-img:nth-child(odd){background:linear-gradient(135deg,#1a1500,#2a2000)}
+.ad-depois .ad-img:nth-child(even){background:linear-gradient(135deg,#1c1a00,#2e2800)}
+.ad-label{font-size:13px;line-height:1.65}
+.ad-antes .ad-label{color:var(--dim)}
+.ad-depois .ad-label{color:var(--muted)}
+.ad-depois .ad-label strong{color:var(--gold)}
+
+/* ── PACK PRINCIPAL ── */
+.pack{background:var(--black);padding:90px 0}
+.pack-header{text-align:center;margin-bottom:56px}
+.pack-header h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--white);margin-bottom:14px;letter-spacing:-.5px}
+.pack-header p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto}
+.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pack-item{background:var(--black2);border:1px solid var(--black5);border-radius:3px;padding:26px 22px;position:relative;overflow:hidden;transition:border-color .25s,transform .2s}
+.pack-item:hover{border-color:var(--gold-line);transform:translateY(-3px)}
+.pack-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .25s}
+.pack-item:hover::after{opacity:1}
+.pack-svg{width:36px;height:36px;margin-bottom:16px;color:var(--gold)}
+.pack-item h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:var(--white);margin-bottom:8px;letter-spacing:.2px}
+.pack-item p{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ── BONUS ── */
+.bonus{background:var(--black3);padding:90px 0;position:relative;overflow:hidden}
+.bonus::before{content:'BÔNUS';position:absolute;right:-30px;top:50%;transform:translateY(-50%) rotate(90deg);font-family:'Playfair Display',serif;font-size:180px;font-weight:900;color:rgba(212,175,55,.025);pointer-events:none;white-space:nowrap}
+.bonus-header{text-align:center;margin-bottom:56px}
+.bonus-header h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--white);margin-bottom:14px;letter-spacing:-.5px}
+.bonus-header p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto}
+.bonus-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.bonus-card{background:var(--black2);border:1px solid var(--gold-line);border-radius:3px;padding:36px 32px;position:relative;overflow:hidden}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--gold) 50%,transparent 100%)}
+.bonus-number{position:absolute;top:20px;right:24px;font-family:'Playfair Display',serif;font-size:90px;font-weight:900;color:rgba(212,175,55,.05);line-height:1;pointer-events:none}
+.bonus-tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.bonus-card h3{font-family:'Playfair Display',serif;font-size:clamp(17px,2vw,22px);color:var(--white);margin-bottom:14px;line-height:1.2;letter-spacing:-.3px}
+.bonus-card>p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:22px}
+.bonus-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.bonus-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--off);line-height:1.6}
+.bonus-list li::before{content:'';width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0;margin-top:8px}
+.bonus-valor{display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid var(--black5)}
+.bonus-de{font-size:13px;color:var(--dim);text-decoration:line-through}
+.bonus-gratis{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;color:#4ade80;letter-spacing:.5px}
+
+/* ── PROVA SOCIAL ── */
+.provas{background:var(--black);padding:90px 0}
+.provas-header{text-align:center;margin-bottom:56px}
+.provas-header h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--white);margin-bottom:14px;letter-spacing:-.5px}
+.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.depo{background:var(--black2);border:1px solid var(--black5);border-radius:3px;padding:28px 24px;transition:border-color .25s}
+.depo:hover{border-color:var(--gold-line)}
+.depo-q{font-family:'Playfair Display',serif;font-size:52px;line-height:.7;color:var(--gold-dim);margin-bottom:14px}
+.stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:12px}
+.depo p{font-size:14px;color:var(--muted);line-height:1.8;font-style:italic;margin-bottom:18px}
+.depo-author{border-top:1px solid var(--black5);padding-top:14px}
+.depo-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--white)}
+.depo-role{font-size:11px;color:var(--dim);margin-top:3px}
+
+/* ── FAQ ── */
+.faq{background:var(--black2);padding:90px 0}
+.faq-header{text-align:center;margin-bottom:52px}
+.faq-header h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--white);letter-spacing:-.5px}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:4px}
+.faq-item{border:1px solid var(--black5);border-radius:2px;overflow:hidden}
+.faq-item.open{border-color:var(--gold-line)}
+.faq-q{width:100%;background:var(--black3);padding:18px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:var(--off);text-align:left;gap:16px;transition:background .2s;border:none}
+.faq-q:hover{background:var(--black4)}
+.faq-item.open .faq-q{color:var(--gold)}
+.faq-arrow{color:var(--gold);font-size:18px;flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:16px 22px 20px;font-size:14px;color:var(--muted);line-height:1.8;background:var(--black3);border-top:1px solid var(--black5)}
+
+/* ── OFERTA ── */
+.oferta{background:var(--black3);padding:90px 0;position:relative;overflow:hidden}
+.oferta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(212,175,55,.07) 0%,transparent 65%);pointer-events:none}
+.oferta-inner{max-width:660px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.oferta-header{margin-bottom:40px}
+.oferta-header h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,44px);color:var(--white);line-height:1.15;margin-bottom:10px;letter-spacing:-.5px}
+.oferta-header p{font-size:15px;color:var(--muted)}
+.oferta-box{border:1px solid var(--gold-line);border-radius:3px;padding:48px 40px;background:var(--black);position:relative}
+.oferta-box::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:1px;background:var(--gold)}
+.countdown-wrap{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:32px;padding:14px 20px;background:rgba(212,175,55,.05);border:1px solid var(--gold-line);border-radius:2px}
+.cd-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.cd-block{display:flex;flex-direction:column;align-items:center;gap:2px}
+.cd-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;min-width:36px;text-align:center}
+.cd-unit{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.cd-sep{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold-line);margin-bottom:10px}
+.price-block{margin-bottom:32px}
+.price-de{font-size:15px;color:var(--dim);text-decoration:line-through;margin-bottom:4px}
+.price-por{font-family:'Playfair Display',serif;font-size:clamp(58px,9vw,82px);font-weight:900;color:var(--gold);line-height:.9;margin-bottom:8px;letter-spacing:-2px}
+.price-por sup{font-size:28px;vertical-align:top;margin-top:12px;margin-right:2px;letter-spacing:0}
+.price-por sub{font-size:26px;letter-spacing:0}
+.price-tag{display:inline-block;background:var(--gold-dim);border:1px solid var(--gold-line);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:1px}
+.recap-divider{height:1px;background:var(--black5);margin:30px 0}
+.recap-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;text-align:left}
+.recap-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:20px;text-align:left}
+.recap-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--off)}
+.recap-list li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.recap-bonus-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--off);margin-bottom:9px;text-align:left}
+.recap-bonus-row::before{content:'＋';color:var(--gold);font-weight:700;flex-shrink:0}
+.recap-free{color:#4ade80;font-weight:700;font-size:11px;white-space:nowrap;margin-left:auto;padding-left:12px}
+.recap-total{background:var(--gold-dim);border:1px solid var(--gold-line);border-radius:2px;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;margin:22px 0 32px}
+.recap-total-label{font-size:13px;color:var(--muted)}
+.recap-total-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold)}
+
+/* CTA BUTTON com pulso */
+.cta-btn{display:block;width:100%;background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));color:#0C0C0C;font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;padding:20px 36px;border-radius:2px;transition:filter .2s,transform .15s;box-shadow:0 0 0 0 rgba(212,175,55,.5);animation:cta-pulse 2.5s infinite}
+@keyframes cta-pulse{0%,100%{box-shadow:0 6px 28px rgba(212,175,55,.3)}50%{box-shadow:0 8px 40px rgba(212,175,55,.6),0 0 0 8px rgba(212,175,55,.07)}}
+.cta-btn:hover{filter:brightness(1.1);transform:translateY(-2px);animation:none;box-shadow:0 14px 44px rgba(212,175,55,.5)}
+.cta-sub{font-size:12px;color:var(--dim);margin-top:12px}
+
+/* ── GARANTIA ── */
+.garantia{background:var(--black);padding:80px 0;border-top:1px solid var(--black5)}
+.garantia-inner{max-width:560px;margin:0 auto;text-align:center}
+.garantia-seal{width:100px;height:100px;border:2px solid var(--gold-line);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;margin:0 auto 24px;position:relative}
+.garantia-seal::before{content:'';position:absolute;inset:4px;border:1px solid rgba(212,175,55,.1);border-radius:50%}
+.garantia-seal-icon{font-size:32px}
+.garantia-seal-text{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.garantia h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--white);margin-bottom:12px;letter-spacing:-.3px}
+.garantia p{font-size:15px;color:var(--muted);line-height:1.8}
+.garantia p strong{color:var(--off)}
+
+/* ── URGÊNCIA ── */
+.urgencia{background:var(--black2);padding:80px 0;border-top:1px solid var(--black5);text-align:center}
+.urgencia-inner{max-width:560px;margin:0 auto}
+.urgencia h3{font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,30px);color:var(--white);margin-bottom:12px;line-height:1.2;letter-spacing:-.3px}
+.urgencia p{font-size:15px;color:var(--muted);margin-bottom:32px;line-height:1.75}
+.urgencia .cta-btn{max-width:460px;margin:0 auto}
+
+/* ── P.S. ── */
+.ps-sec{background:var(--black);padding:56px 0}
+.ps-box{max-width:620px;margin:0 auto;padding:28px 32px;border:1px solid var(--black5);border-radius:3px;border-left:2px solid var(--gold-line)}
+.ps-box p{font-size:15px;color:var(--muted);line-height:1.85}
+.ps-box strong{color:var(--off)}
+
+/* ── FOOTER ── */
+footer{background:#080808;padding:32px 28px;text-align:center;border-top:1px solid var(--black5)}
+.footer-logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);margin-bottom:8px;letter-spacing:3px;display:flex;align-items:center;justify-content:center;gap:10px}
+footer p{font-size:11px;color:var(--dim);letter-spacing:.3px}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal-l{opacity:0;transform:translateX(-24px);transition:opacity .65s ease,transform .65s ease}
+.reveal-r{opacity:0;transform:translateX(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in,.reveal-l.in,.reveal-r.in{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .hero-grid,.prob-grid,.paraquem-grid,.ad-grid,.bonus-cards{grid-template-columns:1fr}
+  .hero-aside{display:none}
+  .pack-grid{grid-template-columns:1fr 1fr}
+  .depo-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .oferta-box{padding:32px 20px}
+}
+@media(max-width:520px){
+  .pack-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ANN BAR -->
+<div class="ann-bar">
+  <div class="ann-bar-inner">
+    <span>✂ Oferta especial encerra em</span>
+    <span id="topTimer">--:--:--</span>
+    <span>— Garanta por R$47,90</span>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content reveal-l">
+        <img src="https://i.ibb.co/KzwJ3v3n/grok-image-39dee333-c67d-4e17-99d4-bffc256115e8.jpg" alt="Pack Barbearia Pro" style="width:100%;max-width:580px;height:auto;border-radius:4px;margin-bottom:36px;filter:drop-shadow(0 20px 60px rgba(0,0,0,.8)) drop-shadow(0 0 40px rgba(212,175,55,.12))"/>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span class="hero-badge-txt">Pack Barbearia Pro — Edição Premium</span>
+        </div>
+        <h1 class="hero-title">Cada dia sem postar é<br>um cliente que foi pra<br><em>barbearia do concorrente.</em></h1>
+        <p class="hero-sub">+60 artes profissionais editáveis no Canva, com <strong>legendas prontas</strong> e acesso vitalício — para qualquer barbearia ter um Instagram que fecha agendamento em menos de 1 hora.</p>
+
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">+60</div><div class="stat-label">Artes exclusivas</div></div>
+          <div class="stat"><div class="stat-num">2</div><div class="stat-label">Bônus inclusos</div></div>
+          <div class="stat"><div class="stat-num">&lt;1h</div><div class="stat-label">Para ter o perfil no ar</div></div>
+          <div class="stat"><div class="stat-num">R$47</div><div class="stat-label">Pagamento único</div></div>
+        </div>
+      </div>
+      <div class="hero-aside reveal-r">
+        <div class="hero-img-wrap" id="heroWrap">
+          <img id="heroImg" src="" alt="" style="display:none"/>
+          <label id="dropZone" for="imgInput">
+            <div class="dz-icon">✂️</div>
+            <div class="dz-title">Adicionar imagem do produto</div>
+            <div class="dz-sub">Clique ou arraste aqui</div>
+            <input type="file" id="imgInput" accept="image/*" style="display:none"/>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ PROBLEMA ══ -->
+<section class="problema tex-leather">
+  <div class="container">
+    <div class="prob-grid">
+      <div class="prob-content reveal-l">
+        <div class="eyebrow">O diagnóstico</div>
+        <div class="section-rule left"><span>✦</span></div>
+        <h2>O problema nunca foi<br>falta de <span class="gold">vontade de postar.</span></h2>
+        <p>Entre atender, gerenciar caixa, repor produto e tentar criar conteúdo — <strong>o dia simplesmente acaba.</strong></p>
+        <p>Você abre o Instagram do concorrente. Feed organizado. Posts profissionais. Stories toda semana. Aquela fisgada.</p>
+        <div class="callout"><p>A diferença entre o perfil dele e o seu não é talento. É ferramenta.</p></div>
+        <p>Perfil amador afasta cliente antes do primeiro contato. Julgamento silencioso — ele olha, não gosta, vai embora. <strong>Você perde agendamento que nem soube que existiu.</strong></p>
+      </div>
+      <div class="prob-cards reveal-r">
+        <div class="prob-card">
+          <div class="prob-card-icon">
+            <svg class="pack-svg" style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="prob-card-text">
+            <h4>3 segundos de julgamento</h4>
+            <p>É o tempo que o cliente leva para decidir se fica ou sai. Um feed amador já encerra a conversa antes de começar.</p>
+          </div>
+        </div>
+        <div class="prob-card">
+          <div class="prob-card-icon">
+            <svg class="pack-svg" style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="prob-card-text">
+            <h4>Perfil parado = cadeira vazia</h4>
+            <p>Cada semana sem postar é mais invisibilidade. O algoritmo para de te mostrar e o cliente esquece que você existe.</p>
+          </div>
+        </div>
+        <div class="prob-card">
+          <div class="prob-card-icon">
+            <svg class="pack-svg" style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="prob-card-text">
+            <h4>Tempo que não aparece</h4>
+            <p>Criar do zero leva horas. Horas que nenhum barbeiro tem entre um cliente e outro.</p>
+          </div>
+        </div>
+        <div class="prob-card">
+          <div class="prob-card-icon">
+            <svg class="pack-svg" style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="prob-card-text">
+            <h4>A solução existe e é simples</h4>
+            <p>Tudo que você precisa são ferramentas certas para ter perfil profissional sem saber design.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black2)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ PARA QUEM É ══ -->
+<section class="paraquem">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow">Identificação</div>
+      <div class="section-rule"><span>✦</span></div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--white);letter-spacing:-.5px">Esse Pack é <span class="gold">para você</span> se…</h2>
+    </div>
+    <div class="paraquem-grid">
+      <div class="pq-block pq-sim reveal-l">
+        <div class="pq-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><polyline points="20 6 9 17 4 12"/></svg>
+          É pra você
+        </div>
+        <ul class="pq-list">
+          <li>Tem barbearia e quer fila na porta vinda do Instagram</li>
+          <li>Está cansado de ver o perfil parado e sem engajamento</li>
+          <li>Não tem tempo de criar conteúdo do zero todo dia</li>
+          <li>Quer um feed profissional sem pagar designer todo mês</li>
+          <li>Tem 1 cadeira ou uma rede — o Pack funciona pra qualquer porte</li>
+          <li>Quer resultado rápido, hoje, sem depender de ninguém</li>
+        </ul>
+      </div>
+      <div class="pq-block pq-nao reveal-r">
+        <div class="pq-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Não é pra você
+        </div>
+        <ul class="pq-list">
+          <li>Não tem barbearia e não planeja ter</li>
+          <li>Quer um serviço completo de gestão de redes sociais</li>
+          <li>Está procurando algo milagroso sem nenhum esforço mínimo</li>
+          <li>Prefere continuar no improviso e torcer pra dar certo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ ANTES / DEPOIS ══ -->
+<section class="antesdepois tex-leather">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow">Transformação</div>
+      <div class="section-rule"><span>✦</span></div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--white);letter-spacing:-.5px">Antes × Depois do <span class="gold">Pack</span></h2>
+      <p style="font-size:15px;color:var(--muted);margin-top:12px;max-width:480px;margin-left:auto;margin-right:auto">A diferença que qualquer cliente vê na primeira olhada no seu perfil</p>
+    </div>
+    <div class="ad-grid">
+      <div class="ad-card ad-antes reveal-l">
+        <div class="ad-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Sem o Pack
+        </div>
+        <div class="ad-mock">
+          <div class="ad-mock-header">
+            <div class="ad-avatar"></div>
+            <div><div class="ad-handle">@barbearia_sem_nome</div><div class="ad-followers">48 seguidores</div></div>
+          </div>
+          <div class="ad-grid-imgs">
+            <div class="ad-img" style="background:#1a1a1a"></div>
+            <div class="ad-img" style="background:#181818"></div>
+            <div class="ad-img" style="background:#1c1c1c"></div>
+            <div class="ad-img" style="background:#191919"></div>
+            <div class="ad-img" style="background:#1b1b1b"></div>
+            <div class="ad-img" style="background:#1a1a1a"></div>
+          </div>
+        </div>
+        <p class="ad-label">Último post: há 3 semanas. Bio genérica. Feed vazio. Nenhum agendamento vindo do Instagram. Cliente novo passa, não segue.</p>
+      </div>
+      <div class="ad-card ad-depois reveal-r">
+        <div class="ad-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><polyline points="20 6 9 17 4 12"/></svg>
+          Com o Pack
+        </div>
+        <div class="ad-mock">
+          <div class="ad-mock-header">
+            <div class="ad-avatar"></div>
+            <div><div class="ad-handle" style="color:var(--gold)">@barberiastyle.pro</div><div class="ad-followers" style="color:var(--muted)">1.240 seguidores</div></div>
+          </div>
+          <div class="ad-grid-imgs">
+            <div class="ad-img" style="background:linear-gradient(135deg,#1a1400,#2e2400)"></div>
+            <div class="ad-img" style="background:linear-gradient(135deg,#181200,#2a2000)"></div>
+            <div class="ad-img" style="background:linear-gradient(135deg,#1c1600,#2c2200)"></div>
+            <div class="ad-img" style="background:linear-gradient(135deg,#1a1400,#2e2400)"></div>
+            <div class="ad-img" style="background:linear-gradient(135deg,#181200,#2a2000)"></div>
+            <div class="ad-img" style="background:linear-gradient(135deg,#1c1600,#2c2200)"></div>
+          </div>
+        </div>
+        <p class="ad-label">Posts toda semana. Feed com identidade visual. Clientes comentando <strong>"ficou profissional"</strong>. Agendamentos chegando pelo DM.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black2)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ PACK PRINCIPAL ══ -->
+<section class="pack tex-lines" id="pack">
+  <div class="container">
+    <div class="pack-header reveal">
+      <div class="eyebrow">O que está incluso</div>
+      <div class="section-rule"><span>✦</span></div>
+      <h2>Pack Barbearia Pro —<br><span class="gold">60+ Artes Exclusivas</span></h2>
+      <p>Feito especificamente para barbearia. Não template genérico de loja de roupa ou restaurante.</p>
+    </div>
+    <div class="pack-grid">
+      <div class="pack-item reveal">
+        <svg class="pack-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <h3>+60 Artes Exclusivas</h3>
+        <p>Visual, linguagem e estética feitos para barbearia. Cada peça comunica o que seu negócio precisa.</p>
+      </div>
+      <div class="pack-item reveal">
+        <svg class="pack-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <h3>Legendas Prontas</h3>
+        <p>Cada arte já vem com a legenda pronta para copiar e postar. Zero esforço criativo da sua parte.</p>
+      </div>
+      <div class="pack-item reveal">
+        <svg class="pack-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <h3>100% no Celular</h3>
+        <p>Edita no Canva pelo celular, entre um cliente e outro. Troca logo e cor em minutos, sem saber design.</p>
+      </div>
+      <div class="pack-item reveal">
+        <svg class="pack-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3>Qualquer Porte</h3>
+        <p>1 cadeira ou rede com várias unidades — cada uma com identidade própria sem custo extra.</p>
+      </div>
+      <div class="pack-item reveal">
+        <svg class="pack-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <h3>Acesso Vitalício</h3>
+        <p>Comprou uma vez, tem para sempre. Sem mensalidade, sem renovação, sem surpresa no bolso.</p>
+      </div>
+      <div class="pack-item reveal">
+        <svg class="pack-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <h3>Suporte Incluso</h3>
+        <p>Qualquer dúvida na hora de editar, tem suporte para garantir que funcione pra você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ BÔNUS ══ -->
+<section class="bonus tex-diamond">
+  <div class="container">
+    <div class="bonus-header reveal">
+      <div class="eyebrow">Bônus exclusivos</div>
+      <div class="section-rule"><span>✦</span></div>
+      <h2>Mas não para por aí.<br><span class="gold">Você ainda leva 2 bônus.</span></h2>
+      <p>Para garantir que você nunca mais fique sem saber o que postar — nem perca tempo criando do zero.</p>
+    </div>
+    <div class="bonus-cards">
+      <div class="bonus-card reveal-l">
+        <div class="bonus-number">01</div>
+        <div class="bonus-tag">Bônus 1</div>
+        <h3>📅 Calendário Estratégico de 30 Dias</h3>
+        <p>Chega de abrir o Instagram sem saber o que postar. Plano completo para 30 dias — cada dia já pensado, tema definido, tipo de post indicado.</p>
+        <ul class="bonus-list">
+          <li>Calendário completo com sugestão de postagens para os 30 dias</li>
+          <li>Indica exatamente o que postar de segunda a domingo sem deixar espaço em branco</li>
+          <li>Temas, tipo de post (carrossel, reel, story, feed) e objetivo de cada publicação</li>
+        </ul>
+        <div class="bonus-valor">
+          <span style="font-size:12px;color:var(--dim)">Valor real:</span>
+          <span class="bonus-de">R$47,00</span>
+          <span class="bonus-gratis">GRÁTIS PARA VOCÊ</span>
+        </div>
+      </div>
+      <div class="bonus-card reveal-r">
+        <div class="bonus-number">02</div>
+        <div class="bonus-tag">Bônus 2</div>
+        <h3>🤖 Pack de Prompts para IA — ChatGPT & Claude</h3>
+        <p>Artes prontas, calendário planejado — e agora cria qualquer texto de barbearia em segundos com IA, sem escrever uma palavra do zero.</p>
+        <ul class="bonus-list">
+          <li>Mais de 50 prompts avançados e otimizados para ChatGPT e Claude</li>
+          <li>Prompts para legendas, carrosséis, reels, stories e anúncios para barbearia</li>
+          <li>Segmentados por objetivo: vendas, engajamento, autoridade e atração de clientes</li>
+        </ul>
+        <div class="bonus-valor">
+          <span style="font-size:12px;color:var(--dim)">Valor real:</span>
+          <span class="bonus-de">R$37,00</span>
+          <span class="bonus-gratis">GRÁTIS PARA VOCÊ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black3)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ PROVA SOCIAL ══ -->
+<section class="provas">
+  <div class="container">
+    <div class="provas-header reveal">
+      <div class="eyebrow">Resultados reais</div>
+      <div class="section-rule"><span>✦</span></div>
+      <h2>Barbeiros que já têm <span class="gold">fila na porta</span></h2>
+    </div>
+    <div class="depo-grid">
+      <div class="depo reveal">
+        <div class="depo-q">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Fui adiando por meses porque achava complicado. Em 15 minutos já tinha 10 posts prontos pra semana inteira.</p>
+        <div class="depo-author"><div class="depo-name">Marcos V.</div><div class="depo-role">Barbeiro — Campinas, SP</div></div>
+      </div>
+      <div class="depo reveal">
+        <div class="depo-q">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Meu Instagram parecia amador. Hoje os próprios clientes comentam que ficou profissional. Não paguei nada além dos R$47.</p>
+        <div class="depo-author"><div class="depo-name">Diego S.</div><div class="depo-role">Dono de barbearia — Fortaleza, CE</div></div>
+      </div>
+      <div class="depo reveal">
+        <div class="depo-q">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Tenho 3 unidades e usava o mesmo material em todas. Agora cada uma tem identidade própria sem contratar ninguém.</p>
+        <div class="depo-author"><div class="depo-name">Rafael T.</div><div class="depo-role">Rede de barbearias — Porto Alegre, RS</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ FAQ ══ -->
+<section class="faq tex-leather">
+  <div class="container">
+    <div class="faq-header reveal">
+      <div class="eyebrow">Dúvidas frequentes</div>
+      <div class="section-rule"><span>✦</span></div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--white);letter-spacing:-.5px">Antes de fechar, <span class="gold">tire suas dúvidas</span></h2>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">Preciso saber design ou mexer no computador?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Não. O Pack funciona 100% no Canva, pelo celular mesmo. Você entra, troca a logo e a cor da sua barbearia, e está feito. Se sabe usar Instagram, sabe usar o Pack.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Funciona para barbearia pequena, de 1 cadeira?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. O Pack foi feito para qualquer porte — de quem está começando com 1 cadeira até quem tem uma rede. A edição é individual, cada unidade fica com a sua identidade.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Quando recebo acesso após a compra?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Imediatamente. Assim que o pagamento é confirmado, você recebe o acesso completo ao Pack, aos 2 bônus e ao suporte. Você pode começar a postar hoje mesmo.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Posso usar as artes para mais de uma barbearia?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">O acesso é pessoal e para uso em uma barbearia. Se tiver mais unidades, o ideal é ter um Pack para cada — assim cada espaço tem identidade visual própria.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">E se eu não gostar? Tem garantia?<span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. Você tem 7 dias de garantia incondicional. Se por qualquer motivo não gostar, devolvemos 100% do seu dinheiro. Sem burocracia, sem pergunta, sem enrolação.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="orn-div" style="background:var(--black2)"><div class="orn-div-inner">✦&nbsp;&nbsp;✂&nbsp;&nbsp;✦</div></div>
+
+<!-- ══ OFERTA ══ -->
+<section class="oferta tex-diamond" id="oferta">
+  <div class="container">
+    <div class="oferta-inner">
+      <div class="oferta-header reveal">
+        <div class="eyebrow">Oferta completa</div>
+        <div class="section-rule"><span>✦</span></div>
+        <h2>Tudo que precisa para ter <span class="gold">fila na porta</span> — hoje.</h2>
+        <p>Uma compra. Acesso imediato. Resultado no mesmo dia.</p>
+      </div>
+      <div class="oferta-box reveal">
+        <!-- COUNTDOWN -->
+        <div class="countdown-wrap">
+          <span class="cd-label">Oferta encerra em</span>
+          <div class="cd-block"><span class="cd-num" id="cdH">00</span><span class="cd-unit">horas</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-block"><span class="cd-num" id="cdM">00</span><span class="cd-unit">min</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-block"><span class="cd-num" id="cdS">00</span><span class="cd-unit">seg</span></div>
+        </div>
+        <!-- PREÇO -->
+        <div class="price-block">
+          <div class="price-de">De R$281,00</div>
+          <div class="price-por"><sup>R$</sup>47<sub>,90</sub></div>
+          <div class="price-tag">Pagamento único · Sem mensalidade</div>
+        </div>
+        <div class="recap-divider"></div>
+        <!-- RECAPITULAÇÃO -->
+        <div class="recap-label">✂ Pack Principal</div>
+        <ul class="recap-list">
+          <li>+60 artes editáveis no Canva exclusivas para barbearia</li>
+          <li>Legendas prontas em cada arte — copiar e postar</li>
+          <li>Edição 100% pelo celular, sem saber design</li>
+          <li>Acesso vitalício e imediato após a compra</li>
+          <li>Suporte ao cliente incluso</li>
+        </ul>
+        <div class="recap-divider"></div>
+        <div class="recap-label">🎁 Bônus Exclusivos — Grátis</div>
+        <div class="recap-bonus-row">
+          <span style="flex:1"><strong style="color:var(--white)">Bônus 1 —</strong> Calendário Estratégico de 30 Dias: saiba o que postar cada dia</span>
+          <span class="recap-free">+R$47 grátis</span>
+        </div>
+        <div class="recap-bonus-row">
+          <span style="flex:1"><strong style="color:var(--white)">Bônus 2 —</strong> Pack de Prompts para IA: cria qualquer conteúdo em segundos</span>
+          <span class="recap-free">+R$37 grátis</span>
+        </div>
+        <div class="recap-total">
+          <span class="recap-total-label">Você leva tudo por</span>
+          <span class="recap-total-val">R$47,90 — pagamento único</span>
+        </div>
+        <a href="#" class="cta-btn">✂ QUERO CADEIRA CHEIA POR R$47,90</a>
+        <p class="cta-sub">🔒 Pagamento seguro · Acesso liberado na hora</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GARANTIA ══ -->
+<section class="garantia">
+  <div class="garantia-inner reveal">
+    <div class="garantia-seal">
+      <div class="garantia-seal-icon">🛡️</div>
+      <div class="garantia-seal-text">Garantia</div>
+    </div>
+    <div class="eyebrow">Risco zero</div>
+    <h3>7 dias de garantia incondicional</h3>
+    <p>Teste o Pack completo por 7 dias. Se por qualquer motivo não gostar, devolvemos <strong>100% do seu dinheiro</strong> — sem burocracia, sem pergunta, sem enrolação.</p>
+  </div>
+</section>
+
+<!-- ══ URGÊNCIA ══ -->
+<section class="urgencia">
+  <div class="urgencia-inner reveal">
+    <div class="eyebrow">Atenção</div>
+    <div class="section-rule"><span>✦</span></div>
+    <h3>Esse preço é promocional e pode mudar a qualquer momento.</h3>
+    <p>Se você está vendo R$47,90 agora, não espere. Cada dia com perfil parado é mais um cliente que a barbearia do lado está fechando.</p>
+    <a href="#oferta" class="cta-btn" style="max-width:460px;margin:0 auto;display:block">GARANTIR MEU PACK AGORA POR R$47,90</a>
+  </div>
+</section>
+
+<!-- ══ P.S. ══ -->
+<section class="ps-sec">
+  <div class="container">
+    <div class="ps-box reveal">
+      <p><strong>P.S.:</strong> Um único cliente novo que veio pelo Instagram já paga esse investimento mais de 10 vezes. Por <strong>R$47,90</strong> você tem mais de 60 posts profissionais prontos, 30 dias de conteúdo planejado e +50 prompts de IA — e sua barbearia aparecendo ainda hoje. Não tem decisão mais fácil que essa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">✦ &nbsp;PACK BARBEARIA PRO&nbsp; ✦</div>
+  <p>© 2024 Pack Barbearia Pro · Todos os direitos reservados</p>
+</footer>
+
+<script>
+// ── REVEAL
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('in');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+
+// ── FAQ
+document.getElementById('faqList').addEventListener('click',e=>{
+  const q=e.target.closest('.faq-q'); if(!q) return;
+  const item=q.closest('.faq-item');
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+});
+
+// ── COUNTDOWN (23h59m59s reiniciando)
+function startCountdown(){
+  const stored=localStorage.getItem('bp_end');
+  let end=stored?parseInt(stored):0;
+  if(!end||end<Date.now()){
+    end=Date.now()+23*3600000+59*60000+59000;
+    try{localStorage.setItem('bp_end',end)}catch(e){}
+  }
+  function tick(){
+    const diff=end-Date.now();
+    if(diff<=0){end=Date.now()+23*3600000+59*60000+59000;try{localStorage.setItem('bp_end',end)}catch(e){}}
+    const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    const fmt=n=>String(n).padStart(2,'0');
+    const t=fmt(h)+':'+fmt(m)+':'+fmt(s);
+    ['cdH','cdM','cdS','topTimer'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el) return;
+      if(id==='topTimer') el.textContent=t;
+      else if(id==='cdH') el.textContent=fmt(h);
+      else if(id==='cdM') el.textContent=fmt(m);
+      else el.textContent=fmt(s);
+    });
+  }
+  tick(); setInterval(tick,1000);
+}
+startCountdown();
+
+// ── IMAGE UPLOAD
+const input=document.getElementById('imgInput');
+const img=document.getElementById('heroImg');
+const zone=document.getElementById('dropZone');
+function showImg(src){img.src=src;img.style.display='block';zone.style.display='none';}
+function loadFile(file){
+  if(!file||!file.type.startsWith('image/')) return;
+  const r=new FileReader(); r.onload=e=>showImg(e.target.result); r.readAsDataURL(file);
+}
+input.addEventListener('change',e=>loadFile(e.target.files[0]));
+zone.addEventListener('dragover',e=>{e.preventDefault();zone.style.borderColor='var(--gold)'});
+zone.addEventListener('dragleave',()=>zone.style.borderColor='');
+zone.addEventListener('drop',e=>{e.preventDefault();loadFile(e.dataTransfer.files[0])});
+</script>
+</body>
+</html>
